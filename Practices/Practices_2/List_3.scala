@@ -1,6 +1,6 @@
-//Add 5 more elements to "Lista" "Verde","Amarillo","Azul","Naranja","Perla"
+//Bring the elements from "lista" "Verde", "Amarillo", "Azul"
 
-//The list that we are going to add the new elements
+//Creat List
 val lista = List("rojo","blanco","negro")
 
 //Adding element 1 "Verde"
@@ -18,6 +18,17 @@ val ele3 = "Naranja" :: ele2
 //Adding element 5 "Perla"
 val ele4 = "Perla" :: ele3 
 
+//The the elements that we are looking for
+ele4(4)
+ele4(3)
+ele4(2)
+
 //The result is 
-//scala> ele5
-//res5: List[String] = List(Perla, Naranja, Azul, amarillo, Verde, rojo, blanco, negro)
+//scala> ele4(4)
+//res7: String = Verde
+
+//scala> ele4(3)
+//res8: String = Amarillo
+
+//scala> ele4(2)
+//res9: String = Azul
