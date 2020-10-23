@@ -1,0 +1,1 @@
+//Create an array of numbers in a range of 1-1000 in steps 5 by 5
