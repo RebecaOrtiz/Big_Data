@@ -1,6 +1,6 @@
 //Create one list call "lista" with elements "rojo","blanco","negro"
 
-//Creat list
+//Create list
 val lista = List("rojo","blanco","negro")
 
 //The result is 

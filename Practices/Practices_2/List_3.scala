@@ -1,6 +1,6 @@
 //Bring the elements from "lista" "Verde", "Amarillo", "Azul"
 
-//Creat List
+//Create List
 val lista = List("rojo","blanco","negro")
 
 //Adding element 1 "Verde"

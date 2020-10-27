@@ -1,6 +1,6 @@
 //Algorithm 3 
 
-//Creat a funticon 
+//Create function
 def fibonacci(num:Int):Int=
 {
 //Give value to variable   
