@@ -46,12 +46,12 @@ val newdf = df.withColumn("HVRatio", df("High")+df("“Volume”"))
 
 /////8. ¿Qué día tuvo el pico mas alto en la columna “Close”?
 
-9. Escribe con tus propias palabras en un comentario de tu codigo. ¿Cuál es el
+/////9. Escribe con tus propias palabras en un comentario de tu codigo. ¿Cuál es el
 significado de la columna Cerrar “Close”?
 
-10. ¿Cuál es el máximo y mínimo de la columna “Volume”?
+/////10. ¿Cuál es el máximo y mínimo de la columna “Volume”?
 
-11.Con Sintaxis Scala/Spark $ conteste los siguiente:
+/////11.Con Sintaxis Scala/Spark $ conteste los siguiente:
 ◦ Hint: Basicamente muy parecido a la session de dates, tendran que crear otro
 dataframe para contestar algunos de los incisos.
 a. ¿Cuántos días fue la columna “Close” inferior a $ 600?
