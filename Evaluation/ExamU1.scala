@@ -46,9 +46,11 @@ netflix_2.describe().show
 
 
 /////8. ¿Qué día tuvo el pico mas alto en la columna “Close”?
+netflix.orderBy($"Close".desc).show(1)
 
 /////9. Escribe con tus propias palabras en un comentario de tu codigo. ¿Cuál es el
 //significado de la columna Cerrar “Close”?
+
 //Para nosotros es el promedio de entre alto y bajo 
 
 /////10. ¿Cuál es el máximo y mínimo de la columna “Volume”?
@@ -62,12 +64,16 @@ netflix.agg(max(netflix(netflix.columns(1))), min(netflix(netflix.columns(1)))).
 import spark.implicits._
 
 //a. ¿Cuántos días fue la columna “Close” inferior a $ 600?
-
+netflix.filter($"Close"<600).count()
 
 //b. ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
+(netflix.filter($"High">500).count()*1.0/netflix.count())*100
 
 //c. ¿Cuál es la correlación de Pearson entre columna “High” y la columna “Volumen”?
+netflix.select(corr("High","Volume")).show()
 
 //d. ¿Cuál es el máximo de la columna “High” por año?
+netflix.groupBy(year(netflix("Date")).alias("Año")).max("High").sort(asc("Año")).show();
 
 //e. ¿Cuál es el promedio de columna “Close” para cada mes del calendario?
+netflix.groupBy(month(netflix("Date")).alias("Mes")).avg("Close").sort(asc("Mes")).show();
