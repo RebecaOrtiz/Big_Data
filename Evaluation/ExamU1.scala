@@ -12,54 +12,62 @@ val spark = SparkSession.builder().getOrCreate()
 
 /////2. Cargue el archivo Netflix Stock CSV, haga que Spark infiera los tipos de datos.
 
-val df = spark.read.option("header", "true").option("inferSchema","true")csv("Netflix_2011_2016")
+val netflix = spark.read.option("header", "true").option("inferSchema","true")csv("Netflix_2011_2016.csv")
 
 
 
 /////3. ¿Cuáles son los nombres de las columnas?
- 
- df.columns
+
+netflix.columns
 
 /////4. ¿Cómo es el esquema?
 
-df.printSchema()
+netflix.printSchema()
 
 /////5. Imprime las primeras 5 columnas.
 
-df.head(5)
+netflix.head(5)
 
-for(column <- df.head(5)){
+for(column <- netflix.head(5)){
     println(column)
 }
 
 /////6. Usa describe () para aprender sobre el DataFrame.
 
-df.describe().show()
+netflix.describe().show()
 
 /////7. Crea un nuevo dataframe con una columna nueva llamada “HV Ratio” que es la
 relación entre el precio de la columna “High” frente a la columna “Volume” de
 acciones negociadas por un día. (Hint: Es una operación de columnas).
 
-val newdf = df.withColumn("HVRatio", df("High")+df("“Volume”"))
+val netflix_2 = netflix.withColumn("HVRatio", netflix("High")+ netflix("Volume"))
 
+netflix_2.describe().show
 
 
 /////8. ¿Qué día tuvo el pico mas alto en la columna “Close”?
 
 /////9. Escribe con tus propias palabras en un comentario de tu codigo. ¿Cuál es el
-significado de la columna Cerrar “Close”?
+//significado de la columna Cerrar “Close”?
+//Para nosotros es el promedio de entre alto y bajo 
 
 /////10. ¿Cuál es el máximo y mínimo de la columna “Volume”?
 
+netflix.agg(max(netflix(netflix.columns(1))), min(netflix(netflix.columns(1)))).show
+
 /////11.Con Sintaxis Scala/Spark $ conteste los siguiente:
-◦ Hint: Basicamente muy parecido a la session de dates, tendran que crear otro
-dataframe para contestar algunos de los incisos.
-a. ¿Cuántos días fue la columna “Close” inferior a $ 600?
+//◦ Hint: Basicamente muy parecido a la session de dates, tendran que crear otro
+//dataframe para contestar algunos de los incisos.
 
-b. ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
+import spark.implicits._
 
-c. ¿Cuál es la correlación de Pearson entre columna “High” y la columna “Volumen”?
+//a. ¿Cuántos días fue la columna “Close” inferior a $ 600?
 
-d. ¿Cuál es el máximo de la columna “High” por año?
 
-e. ¿Cuál es el promedio de columna “Close” para cada mes del calendario?
+//b. ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
+
+//c. ¿Cuál es la correlación de Pearson entre columna “High” y la columna “Volumen”?
+
+//d. ¿Cuál es el máximo de la columna “High” por año?
+
+//e. ¿Cuál es el promedio de columna “Close” para cada mes del calendario?
