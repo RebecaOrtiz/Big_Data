@@ -46,7 +46,10 @@ def afortunado(list:List[Int]): Int={
 val af= List(1,7,7)
 println(afortunado(af))
 
-//
+//The function ""balance" is defined
+//The variables "first" and "second" initialized to 0 are declared
+//It uses a cycle for which it defines whether the data is equal commands a true one, if the data is different it sends a false
+
 def balance(list:List[Int]): Boolean={
     var primera = 0
     var segunda = 0
@@ -64,7 +67,7 @@ def balance(list:List[Int]): Boolean={
     return false 
 }
  
-//
+//3 variables are created and used with the balance function
 val bl = List(3,2,1)
 val bl2 = List(2,3,3,2)
 val bl3 = List(10,30,90)
@@ -73,12 +76,12 @@ balance(bl)
 balance(bl2)
 balance(bl3)
  
-//
+//The "palindromo" function is defined, which if a word is palindromo will return a Boolean value
 def palindromo(palabra:String):Boolean ={
     return (palabra == palabra.reverse)
 }
  
-//
+//Variables are declared with words and printed with the function
 val palabra = "OSO"
 val palabra2 = "ANNA"
 val palabra3 = "JUAN"
