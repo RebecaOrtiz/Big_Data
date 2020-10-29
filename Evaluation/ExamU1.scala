@@ -42,7 +42,8 @@ acciones negociadas por un día. (Hint: Es una operación de columnas).
 
 val netflix_2 = netflix.withColumn("HVRatio", netflix("High")+ netflix("Volume"))
 
-netflix_2.describe().show
+netflix_2.describe().
+show
 
 
 /////8. ¿Qué día tuvo el pico mas alto en la columna “Close”?
