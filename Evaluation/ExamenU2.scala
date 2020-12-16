@@ -14,7 +14,7 @@ import org.apache.spark.sql.SparkSession
 
 
 //We load our dataset with the corresponding .cvs file
-val data = spark.read.option("header","true").option("inferSchema","true").format("cvs").load("iris-master.cvs")
+val data = spark.read.option("header","true").option("inferSchema","true").format("cvs").load("iris.cvs")
 
 
 //We show the columns that the dataset contains.
