@@ -31,3 +31,24 @@ data.show(5)
 //With the following method we can see more detailed information about our dataset.
 data.describe().show()
 
+//Make the pertinent transformation for the categorical data which will be our labels to be classified.
+val data3 = data2.randomSplit(Array(0.07, 0.03), seed = 1234L)
+val train = splits(0)
+val test = splits(1)
+
+println("Training Set =", train.count())
+println("Test Set =", test.count())
+
+//Build the classification model and explain its architecture.
+val layers = Array[Int](4, 5, 4, 3)
+val trainer = new 
+MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).set
+seed(1234L).setMaxIter(100)
+val ModelML = trainer.fit(train)
+val result = ModelML.transform(test)
+
+val predictionAndLabels = result.select("prediction", "label")
+val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+
+//Print the results of the model.
+println(s"Test Set Accuracy = ${evaluator.evaluate(predictionAndLabels)}")
