@@ -14,8 +14,15 @@ import org.apache.spark.sql.SparkSession
 
 
 //We load our dataset with the corresponding .cvs file
-val data = spark.read.option("header","true").option("inferSchema","true").format("cvs").load("iris.cvs")
+val data = spark.read.option("header","true").option("inferSchema","true").format("csv").load("C:/Users/ivan_/Desktop/Big_Data/Evaluation/iris.csv")
+data.show
 
+val label = new StringIndexer().setInputCol("species").setOutputCol("label")
+val labeltransform = label.fit(data).transform(data)
+
+val Features = (new VectorAssembler (). setInputCols (Array ("sepal_length", "sepal_width", "petal_length", "petal_width")). setOutputCol ("features"))
+val data2 = Features.transform (labeltransform)
+data2.show
 
 //We show the columns that the dataset contains.
 data.columns
@@ -32,23 +39,32 @@ data.show(5)
 data.describe().show()
 
 //Make the pertinent transformation for the categorical data which will be our labels to be classified.
-val data3 = data2.randomSplit(Array(0.07, 0.03), seed = 1234L)
+
+val data3 = data2.select("features", "label")
+data3.show()
+
+val splits = data3.randomSplit(Array(0.7, 0.3), seed = 1234L)
 val train = splits(0)
 val test = splits(1)
 
-println("Training Set =", train.count())
-println("Test Set =", test.count())
+println("training set =",train.count())
+
+println("test set =",test.count())
+
 
 //Build the classification model and explain its architecture.
-val layers = Array[Int](4, 5, 4, 3)
-val trainer = new 
-MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).set
-seed(1234L).setMaxIter(100)
-val ModelML = trainer.fit(train)
-val result = ModelML.transform(test)
 
-val predictionAndLabels = result.select("prediction", "label")
-val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+val layers = Array[Int](4, 5, 4, 3)
+
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
+
+val modelML = trainer.fit(train)
+val result = modelML.transform(test)
+ val predictionAndLabels = result.select("prediction", "label")
+ val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+
+
+
 
 //Print the results of the model.
 println(s"Test Set Accuracy = ${evaluator.evaluate(predictionAndLabels)}")
