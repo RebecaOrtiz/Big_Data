@@ -1,2 +1,10 @@
-// Start a simple spark session
-import org.apache.spark.sql.SparkSession
+//load sample_libsvm_data.txt.
+val training = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+
+val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
+
+//Fit the model
+val lsvcModel = lsvc.fit(training)
+
+//Print linear svc
+println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
