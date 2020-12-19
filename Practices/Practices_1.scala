@@ -21,3 +21,17 @@ object CorrelationExample {
       Vectors.sparse(4, Seq((0, 9.0), (3, 1.0)))
     )
 
+// The dataframe is assigned the value of a tuple named Tuple1.
+    val df = data.map(Tuple1.apply).toDF("features")
+
+// Coeff1 is assigned the value of peasron in the data frame.
+    val Row(coeff1: Matrix) = Correlation.corr(df, "features").head
+    println(s"Pearson correlation matrix:\n $coeff1")
+
+// coeff2 is assigned the value of Spearman's correlation in the data frame   val Row(coeff2: Matrix) = Correlation.corr(df, "features", "spearman").head
+    println(s"Spearman correlation matrix:\n $coeff2")
+
+    spark.stop()
+  }
+}
+
